@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- 
+	  Copyright (C) 2015 TYONLINE TECHNOLOGY PTY. LTD.
+	 
+	  Licensed under the Apache License, Version 2.0 (the "License");
+	  you may not use this file except in compliance with the License.
+	  You may obtain a copy of the License at
+	 
+	       http://www.apache.org/licenses/LICENSE-2.0
+	 
+	  Unless required by applicable law or agreed to in writing, software
+	  distributed under the License is distributed on an "AS IS" BASIS,
+	  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	  See the License for the specific language governing permissions and
+	  limitations under the License.
+ --><resources>
+    <string name="app_name">sn4j</string>
+    <string name="app_socialnetwork_id">sn4j</string>
+    <string name="share">Share</string>
+    <string name="share_via">Share via</string>
+    <string name="twitter">Twitter</string>
+    <string name="tweet">Tweet</string>
+    <string name="logging_in">Logging in your social network, please wait...</string>
+    <string name="share_message_succeeded"> has been successfully shared.</string>
+    <string name="share_message_failed">Sorry, there was something wrong when sharing the article</string>
+    <string name="app_authorized">has been successfully authorized. Thank you.</string>
+    <string name="add_me">Please add me to your social network</string>
+    <string name="follow_me">Follow Me</string>
+    <string name="logout_prompt">Are you sure that you want to log out %s?</string>
+    <string name="authorization_attempt_failed">Oops, something wrong, cannot open the authorization window</string>
+</resources>
