@@ -17,12 +17,12 @@
 package au.com.tyo.services.android;
 
 import twitter4j.TwitterException;
+
 import android.content.Context;
 import android.content.res.Resources.NotFoundException;
 import android.graphics.Bitmap;
 import android.util.Base64;
-import android.util.Log;
-import au.com.tyo.services.R;
+
 import au.com.tyo.services.twitter.SNTwitter;
 
 public class Twitter4Droid extends SNTwitter {

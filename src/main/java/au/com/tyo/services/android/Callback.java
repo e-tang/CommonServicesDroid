@@ -23,7 +23,11 @@ public class Callback extends au.com.tyo.services.Callback {
 
 	private Uri uri;
 
-	public Uri toUri() {
+    public Callback(String schema, String host, String path) {
+        super(schema, host, path);
+    }
+
+    public Uri toUri() {
 		return Uri.parse(scheme+"://" + host + "/" + path);
 	}
 

@@ -16,7 +16,6 @@
 
 package au.com.tyo.services.android;
 
-import au.com.tyo.services.R;
 import au.com.tyo.services.SocialNetwork;
 
 public class Resources {

@@ -19,13 +19,10 @@ package au.com.tyo.services.android;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.os.Parcelable;
-import android.util.Log;
-import au.com.tyo.services.R;
 
 public class Share {
 	

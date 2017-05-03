@@ -16,9 +16,6 @@
 
 package au.com.tyo.services.android;
 
-import java.util.LinkedList;
-
-import twitter4j.TwitterException;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningServiceInfo;
 import android.app.Service;
@@ -27,11 +24,15 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Binder;
 import android.os.IBinder;
+
+import java.util.LinkedList;
+
 import au.com.tyo.services.Message;
 import au.com.tyo.services.OnShareToSocialNetworkListener;
 import au.com.tyo.services.SNBase;
 import au.com.tyo.services.SocialNetwork;
 import au.com.tyo.services.twitter.Tweet;
+import twitter4j.TwitterException;
 
 public class SocialNetworkService extends Service {
 	

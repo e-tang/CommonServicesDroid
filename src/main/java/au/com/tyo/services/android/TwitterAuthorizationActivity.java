@@ -21,7 +21,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.webkit.WebView;
-import au.com.tyo.services.R;
 
 public class TwitterAuthorizationActivity extends Activity {
 	

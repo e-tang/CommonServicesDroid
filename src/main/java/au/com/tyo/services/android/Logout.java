@@ -21,7 +21,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import au.com.tyo.services.R;
 import au.com.tyo.services.SNBase;
 
 public class Logout {

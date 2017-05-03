@@ -24,7 +24,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import au.com.tyo.services.R;
 import au.com.tyo.services.SNBase;
 import au.com.tyo.services.SocialNetwork;
 
@@ -85,13 +84,13 @@ public class LoginActivity extends Activity {
 		SNBase sn = SocialNetwork.getInstance().getSocialNetwork(type);
 		
 		if (sn == null) 
-			SocialNetwork.getInstance().setSocialNetwork(sn = SocialNetwork.createSocialNetwork(type));
+			SocialNetwork.getInstance().setSocialNetwork(sn = SocialNetwork.createSocialNetwork(type, Callback.getDefaultCallback()));
 			
         //handle returning from authenticating the user
 		String callbackUrl = uri.toString();
         if (uri != null && callbackUrl.startsWith(sn.getCallback().getHomeUrl())) {	
             try {
-				sn.retrieveAccessToken(uri);
+				sn.retrieveAccessToken();
 				
 				if (sn.hasSecret() && listener != null) {
 					sn.createInstance();
