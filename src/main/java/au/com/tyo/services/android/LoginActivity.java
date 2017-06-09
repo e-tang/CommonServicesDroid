@@ -26,6 +26,7 @@ import android.os.Bundle;
 import android.util.Log;
 import au.com.tyo.services.SNBase;
 import au.com.tyo.services.SocialNetwork;
+import au.com.tyo.services.android.twitter.TwitterAuthorizationActivity;
 
 public class LoginActivity extends Activity {
 	

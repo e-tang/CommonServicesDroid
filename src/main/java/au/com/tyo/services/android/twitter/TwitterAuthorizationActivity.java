@@ -14,13 +14,15 @@
  * limitations under the License.
  */
 
-package au.com.tyo.services.android;
+package au.com.tyo.services.android.twitter;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.webkit.WebView;
+
+import au.com.tyo.services.android.R;
 
 public class TwitterAuthorizationActivity extends Activity {
 	

@@ -14,8 +14,11 @@
  * limitations under the License.
  */
 
-package au.com.tyo.services.android;
+package au.com.tyo.services.android.twitter;
 
+import au.com.tyo.services.android.BitmapUtils;
+import au.com.tyo.services.android.R;
+import au.com.tyo.services.android.SecretSafe;
 import twitter4j.TwitterException;
 
 import android.content.Context;
