@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package au.com.tyo.services.android;
+package au.com.tyo.services.android.sn;
 
 import android.content.Context;
-import au.com.tyo.services.Secret;
-import au.com.tyo.services.StoredSecrets;
+import au.com.tyo.services.sn.Secret;
+import au.com.tyo.services.sn.StoredSecrets;
 
 public class SecretSafe extends StoredSecrets {
 	

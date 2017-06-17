@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package au.com.tyo.services.android;
+package au.com.tyo.services.android.sn;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import au.com.tyo.services.Secret;
+import au.com.tyo.services.sn.Secret;
 
 public class SecretOnDroid {
 

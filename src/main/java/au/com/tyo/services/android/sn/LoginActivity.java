@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package au.com.tyo.services.android;
+package au.com.tyo.services.android.sn;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -24,9 +24,11 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import au.com.tyo.services.SNBase;
-import au.com.tyo.services.SocialNetwork;
-import au.com.tyo.services.android.twitter.TwitterAuthorizationActivity;
+
+import au.com.tyo.services.android.R;
+import au.com.tyo.services.sn.SNBase;
+import au.com.tyo.services.sn.SocialNetwork;
+import au.com.tyo.services.android.sn.twitter.TwitterAuthorizationActivity;
 
 public class LoginActivity extends Activity {
 	

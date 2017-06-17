@@ -12,7 +12,7 @@
  * the License.
  */
 
-package au.com.tyo.services.android.google;
+package au.com.tyo.services.android.sn.google;
 
 import com.google.api.client.googleapis.media.MediaHttpDownloader;
 import com.google.api.client.googleapis.media.MediaHttpDownloaderProgressListener;

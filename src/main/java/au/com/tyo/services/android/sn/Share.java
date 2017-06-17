@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package au.com.tyo.services.android;
+package au.com.tyo.services.android.sn;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +23,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.os.Parcelable;
+
+import au.com.tyo.services.android.R;
 
 public class Share {
 	

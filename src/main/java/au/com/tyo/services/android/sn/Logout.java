@@ -14,14 +14,16 @@
  * limitations under the License.
  */
 
-package au.com.tyo.services.android;
+package au.com.tyo.services.android.sn;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import au.com.tyo.services.SNBase;
+
+import au.com.tyo.services.android.R;
+import au.com.tyo.services.sn.SNBase;
 
 public class Logout {
 	

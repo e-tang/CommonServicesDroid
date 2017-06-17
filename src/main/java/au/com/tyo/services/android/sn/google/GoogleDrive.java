@@ -1,4 +1,4 @@
-package au.com.tyo.services.android.google;
+package au.com.tyo.services.android.sn.google;
 
 import android.accounts.Account;
 import android.app.Activity;

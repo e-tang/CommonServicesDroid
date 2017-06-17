@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package au.com.tyo.services.android;
+package au.com.tyo.services.android.sn;
 
 
 import android.net.Uri;
 
-public class Callback extends au.com.tyo.services.Callback {
+public class Callback extends au.com.tyo.services.sn.Callback {
 
 	private Uri uri;
 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package au.com.tyo.services.android;
+package au.com.tyo.services.android.sn;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

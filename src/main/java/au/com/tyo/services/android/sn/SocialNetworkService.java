@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package au.com.tyo.services.android;
+package au.com.tyo.services.android.sn;
 
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningServiceInfo;
@@ -27,11 +27,11 @@ import android.os.IBinder;
 
 import java.util.LinkedList;
 
-import au.com.tyo.services.Message;
-import au.com.tyo.services.OnShareToSocialNetworkListener;
-import au.com.tyo.services.SNBase;
-import au.com.tyo.services.SocialNetwork;
-import au.com.tyo.services.twitter.Tweet;
+import au.com.tyo.services.sn.Message;
+import au.com.tyo.services.sn.OnShareToSocialNetworkListener;
+import au.com.tyo.services.sn.SNBase;
+import au.com.tyo.services.sn.SocialNetwork;
+import au.com.tyo.services.sn.twitter.Tweet;
 import twitter4j.TwitterException;
 
 public class SocialNetworkService extends Service {

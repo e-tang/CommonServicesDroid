@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-package au.com.tyo.services.android;
+package au.com.tyo.services.android.sn;
 
-import au.com.tyo.services.SocialNetwork;
+import au.com.tyo.services.android.R;
+import au.com.tyo.services.sn.SocialNetwork;
 
 public class Resources {
 
