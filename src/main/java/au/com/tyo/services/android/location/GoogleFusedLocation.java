@@ -1,12 +1,8 @@
 package au.com.tyo.services.android.location;
 
-import android.Manifest;
 import android.app.Activity;
-import android.content.pm.PackageManager;
 import android.location.Location;
-import android.os.Build;
 import android.os.Looper;
-import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -20,6 +16,8 @@ import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.util.Date;
 
+import au.com.tyo.android.CommonPermission;
+
 /**
  * Uses Google Play API for obtaining device locations
  * Created by alejandro.tkachuk
@@ -27,7 +25,7 @@ import java.util.Date;
  * www.calculistik.com Mobile Development
  */
 
-public class GoogleFusedLocation implements au.com.tyo.services.android.location.Location {
+public class GoogleFusedLocation {
 
     private static final String TAG = GoogleFusedLocation.class.getSimpleName();
 
@@ -110,11 +108,7 @@ public class GoogleFusedLocation implements au.com.tyo.services.android.location
         };
 
         this.mFusedLocationClient = LocationServices.getFusedLocationProviderClient(context);
-        if (Build.VERSION.SDK_INT >= 23)
-            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                    && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(context, new String[] {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, LOCATION_PERMISSON_RC);
-            }
+        CommonPermission.checkLocationPermissions(context);
         this.mFusedLocationClient.requestLocationUpdates(this.locationRequest,
                 this.locationCallback, Looper.myLooper());
     }
