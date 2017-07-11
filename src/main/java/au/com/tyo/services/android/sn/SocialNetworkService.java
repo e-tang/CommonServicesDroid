@@ -137,14 +137,13 @@ public class SocialNetworkService extends Service {
 		return super.onStartCommand(intent, flags, startId);
 	}
 	
-	private class MessageHandlingTask implements Runnable/*AsyncTask<Void, Void, Void>*/ {
+	private class MessageHandlingTask implements Runnable {
 		
 		public MessageHandlingTask() {
 			Thread.currentThread().setName("MessageHandlingTask");
 		}
 
 		@Override
-//		protected Void doInBackground(Void... params) {
 		public void run() {
 			
 			while (keepItRunning) {
@@ -179,7 +178,7 @@ public class SocialNetworkService extends Service {
 		@Override
 		protected Void doInBackground(Message... params) {
 			Message msg = params[0];
-			boolean successful = false;
+			boolean successful;
 			int resultCode = 0;
 			if (msg != null) {
 				try {

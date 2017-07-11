@@ -18,6 +18,7 @@ import java.util.Date;
 
 import au.com.tyo.android.CommonPermission;
 
+
 /**
  * Uses Google Play API for obtaining device locations
  * Created by alejandro.tkachuk

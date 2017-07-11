@@ -27,7 +27,11 @@ public class Callback extends au.com.tyo.services.sn.Callback {
         super(schema, host, path);
     }
 
-    public Uri toUri() {
+	public void setUri(Uri uri) {
+		this.uri = uri;
+	}
+
+	public Uri toUri() {
 		return Uri.parse(scheme+"://" + host + "/" + path);
 	}
 
@@ -41,9 +45,8 @@ public class Callback extends au.com.tyo.services.sn.Callback {
 	}
 
 	public String getQueryParameter(String key) {
-		if (uri == null)
-			uri = toUri();
-
+//		if (uri == null)
+//			uri = toUri();
 		return uri.getQueryParameter(key);
 	}
 }

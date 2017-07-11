@@ -26,9 +26,9 @@ import android.os.Bundle;
 import android.util.Log;
 
 import au.com.tyo.services.android.R;
+import au.com.tyo.services.android.sn.twitter.TwitterAuthorizationActivity;
 import au.com.tyo.services.sn.SNBase;
 import au.com.tyo.services.sn.SocialNetwork;
-import au.com.tyo.services.android.sn.twitter.TwitterAuthorizationActivity;
 
 public class LoginActivity extends Activity {
 	
@@ -78,7 +78,7 @@ public class LoginActivity extends Activity {
 		String path = uri.getPath();
 		
 		try {
-			type = path.charAt(0) == '/' ? Integer.valueOf(path.substring(1)) : Integer.valueOf(path);
+			type = path.charAt(9) == '/' ? Integer.valueOf(path.substring(10)) : Integer.valueOf(path);
 		}
 		catch (Exception ex) {
 			type = 1;  // twitter for default? 
@@ -90,21 +90,21 @@ public class LoginActivity extends Activity {
 			SocialNetwork.getInstance().setSocialNetwork(sn = SocialNetwork.createSocialNetwork(type, Callback.getDefaultCallback()));
 			
         //handle returning from authenticating the user
-		String callbackUrl = uri.toString();
-        if (uri != null && callbackUrl.startsWith(sn.getCallback().getHomeUrl())) {	
-            try {
-				sn.retrieveAccessToken();
-				
-				if (sn.hasSecret() && listener != null) {
-					sn.createInstance();
-					
-					listener.onAppAuthorized(type);
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-				Log.e(LOG_TAG, e.getLocalizedMessage() == null ? "Error in processing the twitter access token" : e.getLocalizedMessage());
-			}
-		}
+        Callback callback = (Callback) sn.getCallback();
+        callback.setUri(uri);
+        try {
+            sn.retrieveAccessToken();
+
+            if (sn.hasSecret() && listener != null) {
+                sn.createInstance();
+
+                listener.onAppAuthorized(type);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e(LOG_TAG, e.getLocalizedMessage() == null ? "Error in processing the twitter access token" : e.getLocalizedMessage());
+        }
+		//}
 	}
 	
 	private class RetrieveSocialNetworkAccessTokenTask extends
