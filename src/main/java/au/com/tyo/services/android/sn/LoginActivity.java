@@ -32,19 +32,9 @@ import au.com.tyo.services.sn.SocialNetwork;
 
 public class LoginActivity extends Activity {
 	
-	public static interface LoginListener {
-		void onAppAuthorized(int type);
-	}
-	
 	private static final String LOG_TAG = "LoginActivity";
 	
 	private int type = 0;
-	
-	public static LoginListener listener = null;
-	
-	public void setLoginListener(LoginListener listener) {
-		LoginActivity.listener = listener;
-	}
 
 	@SuppressLint("NewApi")
 	@Override
@@ -95,10 +85,10 @@ public class LoginActivity extends Activity {
         try {
             sn.retrieveAccessToken();
 
-            if (sn.hasSecret() && listener != null) {
+            if (sn.hasSecret() && sn.getListener() != null) {
                 sn.createInstance();
 
-                listener.onAppAuthorized(type);
+                sn.getListener().onAppAuthorized(type);
             }
         } catch (Exception e) {
             e.printStackTrace();
