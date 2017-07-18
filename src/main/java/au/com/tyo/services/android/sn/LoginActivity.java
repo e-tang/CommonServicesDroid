@@ -106,10 +106,10 @@ public class LoginActivity extends Activity {
 			
 			getAccessToken(uri);
 	         
-	         if (type == SocialNetwork.TWITTER)
-	        	 TwitterAuthorizationActivity.closeTwitterAuthorizationActivity(LoginActivity.this);
-				
-	         finish();
+			if (type == SocialNetwork.TWITTER)
+			 	TwitterAuthorizationActivity.closeTwitterAuthorizationActivity(LoginActivity.this);
+
+			finish();
 			return null;
 		}
 	}
