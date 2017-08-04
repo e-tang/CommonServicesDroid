@@ -21,10 +21,10 @@ dependencies {
 
     // Google
     // Dependency for Google Sign-In
-    compile 'com.google.android.gms:play-services-auth:11.0.1'
-    compile 'com.google.android.gms:play-services-drive:11.0.1'
-    compile 'com.google.android.gms:play-services-location:11.0.1'
-    compile 'com.google.android.gms:play-services-maps:11.0.1'
+    compile 'com.google.android.gms:play-services-auth:11.0.2'
+    compile 'com.google.android.gms:play-services-drive:11.0.2'
+    compile 'com.google.android.gms:play-services-location:11.0.2'
+    compile 'com.google.android.gms:play-services-maps:11.0.2'
 
     // Dependencies for the REST API example
     compile 'com.google.api-client:google-api-client:1.22.0'
