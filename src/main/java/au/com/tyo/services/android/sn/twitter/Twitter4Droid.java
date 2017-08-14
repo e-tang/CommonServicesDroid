@@ -16,7 +16,7 @@
 
 package au.com.tyo.services.android.sn.twitter;
 
-import au.com.tyo.services.android.sn.BitmapUtils;
+import au.com.tyo.android.utils.BitmapUtils;
 import au.com.tyo.services.android.R;
 import au.com.tyo.services.android.sn.SecretSafe;
 import twitter4j.TwitterException;
