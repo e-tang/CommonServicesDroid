@@ -45,7 +45,7 @@ dependencies {
     }
 
     // Google Drive java library
-    compile 'com.google.apis:google-api-services-drive:v3-rev67-1.22.0'
+    compile 'com.google.apis:google-api-services-drive:v3-rev81-1.22.0'
 
     // Twitter
     // https://mvnrepository.com/artifact/org.twitter4j/twitter4j-core

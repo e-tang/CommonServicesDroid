@@ -1,4 +1,4 @@
-package au.com.tyo.services.android.sn.google;
+package au.com.tyo.services.android.google;
 
 import android.app.Activity;
 import android.app.PendingIntent;
