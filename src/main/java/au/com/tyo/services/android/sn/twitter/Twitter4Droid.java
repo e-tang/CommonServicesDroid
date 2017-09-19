@@ -78,7 +78,7 @@ public class Twitter4Droid extends SNTwitter {
 				if (Twitter4Droid.this.userProfileImageUrl != null)  {
 					Bitmap bitmap = BitmapUtils.getBitmapFromURL(Twitter4Droid.this.userProfileImageUrl);
 					if (bitmap != null) {
-						String encodedImage = new String(Base64.encode(BitmapUtils.bitmapToBytes(bitmap), Base64.DEFAULT));
+						String encodedImage = new String(Base64.encode(BitmapUtils.bitmapToBytesInPNG(bitmap), Base64.DEFAULT));
 						getUserInfo().setBase64EncodedImage(encodedImage);
 						saveUserInfo();
 					}
