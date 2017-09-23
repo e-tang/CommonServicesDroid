@@ -1,6 +1,7 @@
 package au.com.tyo.services.android.location;
 
 import android.app.Activity;
+import android.location.*;
 import android.location.Location;
 import android.os.Looper;
 import android.util.Log;
@@ -18,37 +19,39 @@ import java.util.Date;
 
 import au.com.tyo.android.CommonPermission;
 
-
-/**
- * Uses Google Play API for obtaining device locations
- * Created by alejandro.tkachuk
- * alejandro@calculistik.com
- * www.calculistik.com Mobile Development
- */
-
 public class GoogleFusedLocation {
 
     private static final String TAG = GoogleFusedLocation.class.getSimpleName();
 
-    private FusedLocationProviderClient mFusedLocationClient;
+    private FusedLocationProviderClient fusedLocationProviderClient;
     private LocationCallback locationCallback;
     private LocationRequest locationRequest;
     private LocationSettingsRequest locationSettingsRequest;
 
-    public static class GPSPoint {
+    public interface OnLocationChangedListener {
+        void onChange(SimpleLocation location);
+    }
+
+    private LocationListener locationListener;
+
+    public static class SimpleLocation {
 
         private BigDecimal lat, lon;
         private Date date;
         private String lastUpdate;
 
-        public GPSPoint(BigDecimal latitude, BigDecimal longitude) {
+        public SimpleLocation(Location location) {
+            this(location.getLatitude(), location.getLongitude());
+        }
+
+        public SimpleLocation(BigDecimal latitude, BigDecimal longitude) {
             this.lat = latitude;
             this.lon = longitude;
             this.date = new Date();
             this.lastUpdate = DateFormat.getTimeInstance().format(this.date);
         }
 
-        public GPSPoint(Double latitude, Double longitude) {
+        public SimpleLocation(Double latitude, Double longitude) {
             this.lat = BigDecimal.valueOf(latitude);
             this.lon = BigDecimal.valueOf(longitude);
         }
@@ -72,20 +75,15 @@ public class GoogleFusedLocation {
 
         @Override
         public String toString() {
-            return "(" + lat + ", " + lon + ")";
+            return "(lat: " + lat + ", lon: " + lon + ")";
         }
     }
-
-    public interface Workable<T> {
-        void work(T t);
-    }
-
-    private Workable<GPSPoint> workable;
 
     private static final long UPDATE_INTERVAL_IN_MILLISECONDS = 1000;
     private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = 1000;
 
-    public GoogleFusedLocation(Activity context) {
+    public GoogleFusedLocation() {
+
         this.locationRequest = new LocationRequest();
         this.locationRequest.setInterval(UPDATE_INTERVAL_IN_MILLISECONDS);
         this.locationRequest.setFastestInterval(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS);
@@ -98,24 +96,28 @@ public class GoogleFusedLocation {
         this.locationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(LocationResult locationResult) {
-                super.onLocationResult(locationResult); // why? this. is. retarded. Android.
-                Location currentLocation = locationResult.getLastLocation();
+                super.onLocationResult(locationResult);
+                android.location.Location currentLocation = locationResult.getLastLocation();
 
-                GPSPoint gpsPoint = new GPSPoint(currentLocation.getLatitude(), currentLocation.getLongitude());
-                Log.i(TAG, "Location Callback results: " + gpsPoint);
-                if (null != workable)
-                    workable.work(gpsPoint);
+                if (null != locationListener)
+                    locationListener.onLocationChanged(currentLocation);
             }
         };
-
-        this.mFusedLocationClient = LocationServices.getFusedLocationProviderClient(context);
-        CommonPermission.checkLocationPermissions(context);
-        this.mFusedLocationClient.requestLocationUpdates(this.locationRequest,
-                this.locationCallback, Looper.myLooper());
     }
 
-    public void onChange(Workable<GPSPoint> workable) {
-        this.workable = workable;
+    public void setLocationListener(LocationListener locationListener) {
+        this.locationListener = locationListener;
+    }
+
+    public void start(Activity context) {
+
+        // this cant be associated with UI / Page
+        CommonPermission.checkLocationPermissions(context);
+
+        this.fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context);
+
+        this.fusedLocationProviderClient.requestLocationUpdates(this.locationRequest,
+                this.locationCallback, Looper.myLooper());
     }
 
     public LocationSettingsRequest getLocationSettingsRequest() {
@@ -124,7 +126,7 @@ public class GoogleFusedLocation {
 
     public void stop() {
         Log.i(TAG, "stop() Stopping location tracking");
-        this.mFusedLocationClient.removeLocationUpdates(this.locationCallback);
+        this.fusedLocationProviderClient.removeLocationUpdates(this.locationCallback);
     }
 }
 

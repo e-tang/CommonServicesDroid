@@ -17,10 +17,10 @@ import java.util.TimerTask;
 import static android.location.LocationManager.GPS_PROVIDER;
 
 /**
- * Created by deepshikha on 24/11/16.
+ *
  */
 
-public class GoogleLocationService extends Service implements LocationListener {
+public class LocationService extends Service implements LocationListener {
 
     public static final String ACTION = "au.com.tyo.services.android.location";
 
@@ -35,7 +35,7 @@ public class GoogleLocationService extends Service implements LocationListener {
 
     Intent intent;
 
-    public GoogleLocationService() {
+    public LocationService() {
 
     }
 
@@ -52,7 +52,7 @@ public class GoogleLocationService extends Service implements LocationListener {
         mTimer = new Timer();
         mTimer.schedule(new TimerTaskToGetLocation(), 5, notify_interval);
         intent = new Intent(ACTION);
-//        getlocation();
+//        getLocation();
     }
 
     @Override
@@ -75,7 +75,7 @@ public class GoogleLocationService extends Service implements LocationListener {
 
     }
 
-    private void getlocation() {
+    private void getLocation() {
         locationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
         isGPSEnable = locationManager.isProviderEnabled(GPS_PROVIDER);
         isNetworkEnable = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
@@ -91,12 +91,12 @@ public class GoogleLocationService extends Service implements LocationListener {
                     location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                     if (location!=null){
 
-                        Log.e("latitude",location.getLatitude()+"");
-                        Log.e("longitude",location.getLongitude()+"");
+                        Log.e("latitude", location.getLatitude() + "");
+                        Log.e("longitude",location.getLongitude() + "");
 
                         latitude = location.getLatitude();
                         longitude = location.getLongitude();
-                        fn_update(location);
+                        updateLocation(location);
                     }
                 }
 
@@ -113,7 +113,7 @@ public class GoogleLocationService extends Service implements LocationListener {
                         Log.e("longitude",location.getLongitude()+"");
                         latitude = location.getLatitude();
                         longitude = location.getLongitude();
-                        fn_update(location);
+                        updateLocation(location);
                     }
                 }
             }
@@ -130,14 +130,14 @@ public class GoogleLocationService extends Service implements LocationListener {
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    getlocation();
+                    getLocation();
                 }
             });
 
         }
     }
 
-    private void fn_update(Location location){
+    private void updateLocation(Location location){
         intent.putExtra("latutide",location.getLatitude()+"");
         intent.putExtra("longitude",location.getLongitude()+"");
         sendBroadcast(intent);
