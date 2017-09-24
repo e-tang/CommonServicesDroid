@@ -1,8 +1,8 @@
 package au.com.tyo.services.android.location;
 
 import android.app.Activity;
-import android.location.*;
 import android.location.Location;
+import android.location.LocationListener;
 import android.os.Looper;
 import android.util.Log;
 
@@ -17,9 +17,11 @@ import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.util.Date;
 
+import au.com.tyo.android.CommonLocation;
 import au.com.tyo.android.CommonPermission;
+import au.com.tyo.utils.LocationUtils;
 
-public class GoogleFusedLocation {
+public class GoogleFusedLocation extends CommonLocation {
 
     private static final String TAG = GoogleFusedLocation.class.getSimpleName();
 
@@ -34,9 +36,9 @@ public class GoogleFusedLocation {
 
     private LocationListener locationListener;
 
-    public static class SimpleLocation {
+    public static class SimpleLocation implements LocationUtils.LocationPoint {
 
-        private BigDecimal lat, lon;
+        private double lat, lon;
         private Date date;
         private String lastUpdate;
 
@@ -44,19 +46,14 @@ public class GoogleFusedLocation {
             this(location.getLatitude(), location.getLongitude());
         }
 
-        public SimpleLocation(BigDecimal latitude, BigDecimal longitude) {
+        public SimpleLocation(double latitude, double longitude) {
             this.lat = latitude;
             this.lon = longitude;
             this.date = new Date();
             this.lastUpdate = DateFormat.getTimeInstance().format(this.date);
         }
 
-        public SimpleLocation(Double latitude, Double longitude) {
-            this.lat = BigDecimal.valueOf(latitude);
-            this.lon = BigDecimal.valueOf(longitude);
-        }
-
-        public BigDecimal getLatitude() {
+        public double getLatitude() {
             return lat;
         }
 
@@ -68,8 +65,7 @@ public class GoogleFusedLocation {
             return lastUpdate;
         }
 
-        public BigDecimal getLongitude() {
-
+        public double getLongitude() {
             return lon;
         }
 
@@ -79,10 +75,11 @@ public class GoogleFusedLocation {
         }
     }
 
-    private static final long UPDATE_INTERVAL_IN_MILLISECONDS = 1000;
+    private static final long UPDATE_INTERVAL_IN_MILLISECONDS = 5 * 60 * 1000;
     private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = 1000;
 
-    public GoogleFusedLocation() {
+    public GoogleFusedLocation(Activity context) {
+        super(context);
 
         this.locationRequest = new LocationRequest();
         this.locationRequest.setInterval(UPDATE_INTERVAL_IN_MILLISECONDS);
@@ -109,8 +106,8 @@ public class GoogleFusedLocation {
         this.locationListener = locationListener;
     }
 
-    public void start(Activity context) {
-
+    public void start() {
+        Activity context = (Activity) getContext();
         // this cant be associated with UI / Page
         CommonPermission.checkLocationPermissions(context);
 
