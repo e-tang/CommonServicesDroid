@@ -2,38 +2,33 @@ package au.com.tyo.services.android.location;
 
 import android.app.Activity;
 import android.location.Location;
-import android.location.LocationListener;
-import android.os.Looper;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 
-import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.util.Date;
 
+import au.com.tyo.android.BuildConfig;
 import au.com.tyo.android.CommonLocation;
 import au.com.tyo.android.CommonPermission;
 import au.com.tyo.utils.LocationUtils;
 
-public class GoogleFusedLocation extends CommonLocation {
+public class GoogleFusedLocation extends CommonLocation implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private static final String TAG = GoogleFusedLocation.class.getSimpleName();
 
-    private FusedLocationProviderClient fusedLocationProviderClient;
-    private LocationCallback locationCallback;
+    private GoogleApiClient googleApiClient;
     private LocationRequest locationRequest;
     private LocationSettingsRequest locationSettingsRequest;
-
-    public interface OnLocationChangedListener {
-        void onChange(SimpleLocation location);
-    }
-
     private LocationListener locationListener;
 
     public static class SimpleLocation implements LocationUtils.LocationPoint {
@@ -75,8 +70,8 @@ public class GoogleFusedLocation extends CommonLocation {
         }
     }
 
-    private static final long UPDATE_INTERVAL_IN_MILLISECONDS = 5 * 60 * 1000;
-    private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = 1000;
+    private static final long UPDATE_INTERVAL_IN_MILLISECONDS = BuildConfig.DEBUG ? 0 : 1 * 60 * 1000;
+    private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = BuildConfig.DEBUG ? 0: 1000;
 
     public GoogleFusedLocation(Activity context) {
         super(context);
@@ -89,18 +84,8 @@ public class GoogleFusedLocation extends CommonLocation {
         LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
         builder.addLocationRequest(this.locationRequest);
         this.locationSettingsRequest = builder.build();
-
-        this.locationCallback = new LocationCallback() {
-            @Override
-            public void onLocationResult(LocationResult locationResult) {
-                super.onLocationResult(locationResult);
-                android.location.Location currentLocation = locationResult.getLastLocation();
-
-                if (null != locationListener)
-                    locationListener.onLocationChanged(currentLocation);
-            }
-        };
     }
+
 
     public void setLocationListener(LocationListener locationListener) {
         this.locationListener = locationListener;
@@ -111,10 +96,16 @@ public class GoogleFusedLocation extends CommonLocation {
         // this cant be associated with UI / Page
         CommonPermission.checkLocationPermissions(context);
 
-        this.fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context);
+        this.googleApiClient = new GoogleApiClient.Builder(context)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
 
-        this.fusedLocationProviderClient.requestLocationUpdates(this.locationRequest,
-                this.locationCallback, Looper.myLooper());
+//        this.googleApiClient.requestLocationUpdates(this.locationRequest,
+//                this.locationCallback, Looper.myLooper());
+
+        connect();
     }
 
     public LocationSettingsRequest getLocationSettingsRequest() {
@@ -123,7 +114,47 @@ public class GoogleFusedLocation extends CommonLocation {
 
     public void stop() {
         Log.i(TAG, "stop() Stopping location tracking");
-        this.fusedLocationProviderClient.removeLocationUpdates(this.locationCallback);
+        LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, this);
     }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        Log.i(TAG, "Connected to Google location service.");
+
+        Location location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+        setStartLocation(location);
+
+        LocationServices.FusedLocationApi.requestLocationUpdates(this.googleApiClient, this.locationRequest, locationListener == null ? this : locationListener);
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        Log.i(TAG, "Connection to Google location service suspended.");
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        Log.i(TAG, "Connection to Google location service failed.");
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        setLastKnownLocation(location);
+    }
+
+    public void connect() {
+        if (null != googleApiClient && !googleApiClient.isConnected())
+            googleApiClient.connect();
+    }
+
+    public void disconnect() {
+        if (null != googleApiClient && googleApiClient.isConnected())
+            googleApiClient.disconnect();
+    }
+
+    /**
+     * some useful references
+     * 1. https://stackoverflow.com/questions/39226392/android-google-fused-location-doesnt-work-while-location-is-turned-off
+     */
 }
 
