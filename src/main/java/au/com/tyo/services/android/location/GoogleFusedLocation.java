@@ -93,8 +93,6 @@ public class GoogleFusedLocation extends CommonLocation implements GoogleApiClie
 
     public void start() {
         Activity context = (Activity) getContext();
-        // this cant be associated with UI / Page
-        CommonPermission.checkLocationPermissions(context);
 
         this.googleApiClient = new GoogleApiClient.Builder(context)
                 .addConnectionCallbacks(this)
