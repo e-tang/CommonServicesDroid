@@ -1,6 +1,7 @@
 package au.com.tyo.services.android.location;
 
 import android.app.Activity;
+import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -73,7 +74,7 @@ public class GoogleFusedLocation extends CommonLocation implements GoogleApiClie
     private static final long UPDATE_INTERVAL_IN_MILLISECONDS = BuildConfig.DEBUG ? 0 : 1 * 60 * 1000;
     private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = BuildConfig.DEBUG ? 0: 1000;
 
-    public GoogleFusedLocation(Activity context) {
+    public GoogleFusedLocation(Context context) {
         super(context);
 
         this.locationRequest = new LocationRequest();
@@ -91,8 +92,7 @@ public class GoogleFusedLocation extends CommonLocation implements GoogleApiClie
         this.locationListener = locationListener;
     }
 
-    public void start() {
-        Activity context = (Activity) getContext();
+    public void start(Activity context) {
 
         this.googleApiClient = new GoogleApiClient.Builder(context)
                 .addConnectionCallbacks(this)
