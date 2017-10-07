@@ -74,8 +74,8 @@ public class GoogleFusedLocation extends CommonLocation implements GoogleApiClie
     private static final long UPDATE_INTERVAL_IN_MILLISECONDS = BuildConfig.DEBUG ? 0 : 1 * 60 * 1000;
     private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = BuildConfig.DEBUG ? 0: 1000;
 
-    public GoogleFusedLocation(Context context) {
-        super(context);
+    public GoogleFusedLocation() {
+        super();
 
         this.locationRequest = new LocationRequest();
         this.locationRequest.setInterval(UPDATE_INTERVAL_IN_MILLISECONDS);
