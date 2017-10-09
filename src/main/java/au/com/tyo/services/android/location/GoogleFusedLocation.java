@@ -1,6 +1,5 @@
 package au.com.tyo.services.android.location;
 
-import android.app.Activity;
 import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
@@ -20,7 +19,6 @@ import java.util.Date;
 
 import au.com.tyo.android.BuildConfig;
 import au.com.tyo.android.CommonLocation;
-import au.com.tyo.android.CommonPermission;
 import au.com.tyo.utils.LocationUtils;
 
 public class GoogleFusedLocation extends CommonLocation implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
@@ -92,7 +90,7 @@ public class GoogleFusedLocation extends CommonLocation implements GoogleApiClie
         this.locationListener = locationListener;
     }
 
-    public void start(Activity context) {
+    public void start(Context context) {
 
         this.googleApiClient = new GoogleApiClient.Builder(context)
                 .addConnectionCallbacks(this)
