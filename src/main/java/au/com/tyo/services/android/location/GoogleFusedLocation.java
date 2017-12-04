@@ -3,6 +3,7 @@ package au.com.tyo.services.android.location;
 import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -18,10 +19,11 @@ import java.text.DateFormat;
 import java.util.Date;
 
 import au.com.tyo.android.BuildConfig;
-import au.com.tyo.android.CommonLocation;
+import au.com.tyo.android.CommonLocationService;
+import au.com.tyo.android.Constants;
 import au.com.tyo.utils.LocationUtils;
 
-public class GoogleFusedLocation extends CommonLocation implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+public class GoogleFusedLocation extends CommonLocationService implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private static final String TAG = GoogleFusedLocation.class.getSimpleName();
 
@@ -85,21 +87,21 @@ public class GoogleFusedLocation extends CommonLocation implements GoogleApiClie
         this.locationSettingsRequest = builder.build();
     }
 
+    public boolean isConnected() {
+        return (null != googleApiClient && googleApiClient.isConnected());
+    }
 
     public void setLocationListener(LocationListener locationListener) {
         this.locationListener = locationListener;
     }
 
     public void start(Context context) {
-
-        this.googleApiClient = new GoogleApiClient.Builder(context)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build();
-
-//        this.googleApiClient.requestLocationUpdates(this.locationRequest,
-//                this.locationCallback, Looper.myLooper());
+        if (null == googleApiClient)
+            this.googleApiClient = new GoogleApiClient.Builder(context)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
 
         connect();
     }
@@ -117,6 +119,31 @@ public class GoogleFusedLocation extends CommonLocation implements GoogleApiClie
     public void onConnected(@Nullable Bundle bundle) {
         Log.i(TAG, "Connected to Google location service.");
 
+        if (hasLocationPermission())
+            startLocationUpdate();
+    }
+
+    @Override
+    protected boolean handleServiceMessage(Message m) {
+        if (m.what == Constants.MESSAGE_SERVICE_PERMISSION_GRANTED) {
+            onPermissionMessageReceived();
+        }
+        return super.handleServiceMessage(m);
+    }
+
+    protected void onPermissionMessageReceived() {
+         if (hasLocationPermission())
+             onHasLocationPermission();
+    }
+
+    protected void onHasLocationPermission() {
+        startLocationUpdate();
+    }
+
+    /**
+     * Make sure we have the permission
+     */
+    protected void startLocationUpdate() {
         Location location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
         setStartLocation(location);
 
@@ -139,14 +166,15 @@ public class GoogleFusedLocation extends CommonLocation implements GoogleApiClie
     }
 
     public void connect() {
-        if (null != googleApiClient && !googleApiClient.isConnected())
+        if (!isConnected())
             googleApiClient.connect();
     }
 
     public void disconnect() {
-        if (null != googleApiClient && googleApiClient.isConnected())
+        if (isConnected())
             googleApiClient.disconnect();
     }
+
 
     /**
      * some useful references
