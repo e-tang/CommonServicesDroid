@@ -17,7 +17,6 @@
 package au.com.tyo.services.android.sn;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -25,12 +24,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 
+import au.com.tyo.app.CommonActivity;
 import au.com.tyo.services.android.R;
 import au.com.tyo.services.android.sn.twitter.TwitterAuthorizationActivity;
 import au.com.tyo.services.sn.SNBase;
 import au.com.tyo.services.sn.SocialNetwork;
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends CommonActivity {
 	
 	private static final String LOG_TAG = "LoginActivity";
 	
@@ -53,14 +53,6 @@ public class LoginActivity extends Activity {
 				task.execute(intent.getData());
 		}
 		finish();
-//		new Thread(new Runnable() {
-//
-//			@Override
-//			public void run() {
-//				new RetrieveSocialNetworkAccessTokenTask().execute(intent.getData());
-//			}
-//			
-//		}).run();
 	}
 	
 	public void getAccessToken(Uri uri) {
@@ -97,7 +89,7 @@ public class LoginActivity extends Activity {
 		//}
 	}
 	
-	private class RetrieveSocialNetworkAccessTokenTask extends
+	protected class RetrieveSocialNetworkAccessTokenTask extends
 				AsyncTask<Uri, Void, Void> {
 
 		@Override

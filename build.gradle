@@ -53,6 +53,7 @@ dependencies {
         // exclude group: 'org.apache.httpcomponents'
     //}
 
+    compile project(path: ':CommonAppLib')
 }
 
 repositories {
