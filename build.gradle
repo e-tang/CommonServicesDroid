@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         minSdkVersion 15
@@ -16,9 +16,12 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
     //compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.3'
-    compile 'org.apache.httpcomponents:httpclient:4.5.2'
+    // compile 'org.apache.httpcomponents:httpclient:4.5.2'
 
-    compile 'com.google.code.gson:gson:2.8.0'
+    compile ('com.google.code.gson:gson:2.8.0') {
+        exclude module: 'httpclient'
+        exclude group: 'org.apache.httpcomponents'
+    }
 
 //    compile ('com.google.http-client:google-http-client:1.22.0') {
 //        exclude group: 'org.apache.httpcomponents'
@@ -31,17 +34,17 @@ dependencies {
 
     // Google
     // Dependency for Google Sign-In
-    compile 'com.google.android.gms:play-services-auth:11.2.2'
-    compile 'com.google.android.gms:play-services-drive:11.2.2'
-    compile 'com.google.android.gms:play-services-location:11.2.2'
-    compile 'com.google.android.gms:play-services-maps:11.2.2'
+    compile 'com.google.android.gms:play-services-auth:11.8.0'
+    compile 'com.google.android.gms:play-services-drive:11.8.0'
+    compile 'com.google.android.gms:play-services-location:11.8.0'
+    compile 'com.google.android.gms:play-services-maps:11.8.0'
 
     // Dependencies for the REST API example
     compile ('com.google.api-client:google-api-client:1.22.0') {
-        // exclude group: 'org.apache.httpcomponents'
+        exclude group: 'org.apache.httpcomponents'
     }
     compile ('com.google.api-client:google-api-client-android:1.22.0') {
-        // exclude group: 'org.apache.httpcomponents'
+        exclude group: 'org.apache.httpcomponents'
     }
 
     // Google Drive java library
