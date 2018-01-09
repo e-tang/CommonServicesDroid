@@ -6,6 +6,8 @@ import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -196,9 +198,13 @@ public class CloudPrintDialog extends CommonActivityWebView {
         printIntent.putExtra("title", title);
         context.startActivity(printIntent);
     }
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    public static void printImageAsPdfDocument(final Context context, final String title, final Bitmap bitmap, PdfDocument.PageInfo pageInfo) {
+
+    }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
-    public static void printDocument(final Context context, final Uri docUri, final String docMimeType, final String title) {
+    public static void printDocument(final Context context, final Uri docUri, final String docMimeType, final String title, int width, int height) {
 
         final boolean isPhoto = docMimeType.startsWith("image");
         if (isPhoto) {
@@ -210,6 +216,14 @@ public class CloudPrintDialog extends CommonActivityWebView {
                 Log.e(TAG, "Cannot find photo: " +  docUri.toString());
             }
             return;
+        }
+
+        PrintAttributes attributes = null;
+        if (width > -1 && height > -1) {
+            attributes = new PrintAttributes.Builder()
+                    .setMediaSize(new PrintAttributes.MediaSize("Special" , "Custom", width,height))
+                    .setColorMode(PrintAttributes.COLOR_MODE_MONOCHROME)
+                    .build();
         }
 
         PrintManager printManager = (PrintManager) context.getSystemService(Context.PRINT_SERVICE);
@@ -276,6 +290,6 @@ public class CloudPrintDialog extends CommonActivityWebView {
 
 
         };
-        printManager.print(jobName, pda, null);
+        printManager.print(jobName, pda, attributes);
     }
 }
