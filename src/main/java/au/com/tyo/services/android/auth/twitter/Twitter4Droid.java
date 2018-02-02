@@ -14,24 +14,23 @@
  * limitations under the License.
  */
 
-package au.com.tyo.services.android.sn.twitter;
-
-import au.com.tyo.android.utils.BitmapUtils;
-import au.com.tyo.services.android.R;
-import au.com.tyo.services.android.sn.SecretSafe;
-import twitter4j.TwitterException;
+package au.com.tyo.services.android.auth.twitter;
 
 import android.content.Context;
 import android.content.res.Resources.NotFoundException;
 import android.graphics.Bitmap;
 import android.util.Base64;
 
+import au.com.tyo.android.utils.BitmapUtils;
+import au.com.tyo.services.android.R;
+import au.com.tyo.services.android.auth.SecretSafe;
 import au.com.tyo.services.sn.twitter.SNTwitter;
+import twitter4j.TwitterException;
 
 public class Twitter4Droid extends SNTwitter {
 	
 	public static final String LOG_TAG = "Twitter4Droid";
-	
+
 	private Context context;
 	
 	public Twitter4Droid(Context context) {

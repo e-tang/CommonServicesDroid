@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package au.com.tyo.services.android.sn;
+package au.com.tyo.services.android.auth;
 
 import au.com.tyo.services.android.R;
 import au.com.tyo.services.sn.SocialNetwork;

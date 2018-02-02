@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package au.com.tyo.services.android.sn.twitter;
+package au.com.tyo.services.android.auth.twitter;
 
 import android.app.Activity;
 import android.content.Context;

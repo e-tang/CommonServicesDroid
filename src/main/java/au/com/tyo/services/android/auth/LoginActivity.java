@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package au.com.tyo.services.android.sn;
+package au.com.tyo.services.android.auth;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -26,7 +26,7 @@ import android.util.Log;
 
 import au.com.tyo.app.CommonActivity;
 import au.com.tyo.services.android.R;
-import au.com.tyo.services.android.sn.twitter.TwitterAuthorizationActivity;
+import au.com.tyo.services.android.auth.twitter.TwitterAuthorizationActivity;
 import au.com.tyo.services.sn.SNBase;
 import au.com.tyo.services.sn.SocialNetwork;
 

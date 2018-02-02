@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package au.com.tyo.services.android.sn;
+package au.com.tyo.services.android.auth;
 
 import android.content.Context;
 import au.com.tyo.services.sn.Secret;

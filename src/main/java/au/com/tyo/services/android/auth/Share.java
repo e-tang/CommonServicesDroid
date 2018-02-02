@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package au.com.tyo.services.android.sn;
+package au.com.tyo.services.android.auth;
 
 import java.util.ArrayList;
 import java.util.List;
