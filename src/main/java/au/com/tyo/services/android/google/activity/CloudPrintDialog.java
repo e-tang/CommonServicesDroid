@@ -64,7 +64,7 @@ public class CloudPrintDialog extends CommonActivityWebView {
         getAgent().setPageClass(CloudPrintPage.class);
     }
 
-    public static class CloudPrintPage extends PageWebView implements PageWebView.WebPageListener {
+    public static class CloudPrintPage extends PageWebView<Controller> implements PageWebView.WebPageListener {
 
         private Intent cloudPrintIntent;
 
@@ -122,14 +122,17 @@ public class CloudPrintDialog extends CommonActivityWebView {
             @JavascriptInterface
             public String toString() { return JS_INTERFACE; }
 
+            @JavascriptInterface
             public String getType() {
                 return cloudPrintIntent.getType();
             }
 
+            @JavascriptInterface
             public String getTitle() {
                 return cloudPrintIntent.getExtras().getString("title");
             }
 
+            @JavascriptInterface
             public String getContent() {
                 try {
                     ContentResolver contentResolver = getActivity().getContentResolver();
@@ -154,10 +157,12 @@ public class CloudPrintDialog extends CommonActivityWebView {
                 return "";
             }
 
+            @JavascriptInterface
             public String getEncoding() {
                 return CONTENT_TRANSFER_ENCODING;
             }
 
+            @JavascriptInterface
             public void onPostMessage(String message) {
                 if (message.startsWith(CLOSE_POST_MESSAGE_NAME)) {
                     finish();
