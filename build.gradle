@@ -11,23 +11,23 @@ android {
 }
 
 dependencies {
-    api project (':CommonServices')
-    api project (':CommonAndroid')
+    implementation project (':CommonServices')
+    implementation project (':CommonAndroid')
 
     // https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
-    //api group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.3'
-    // api 'org.apache.httpcomponents:httpclient:4.5.2'
+    //implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.3'
+    // implementation 'org.apache.httpcomponents:httpclient:4.5.2'
 
-    api ('com.google.code.gson:gson:2.8.0') {
+    implementation ('com.google.code.gson:gson:2.8.0') {
         exclude module: 'httpclient'
         exclude group: 'org.apache.httpcomponents'
     }
 
-//    api ('com.google.http-client:google-http-client:1.22.0') {
+//    implementation ('com.google.http-client:google-http-client:1.22.0') {
 //        exclude group: 'org.apache.httpcomponents'
 //    }
 
-    api ('com.google.http-client:google-http-client-gson:1.22.0') {
+    implementation ('com.google.http-client:google-http-client-gson:1.22.0') {
         exclude module: 'httpclient'
         exclude group: 'org.apache.httpcomponents'
     }
@@ -35,29 +35,29 @@ dependencies {
     // Google
     // Dependency for Google Sign-In
     implementation  'com.google.android.gms:play-services-base:15.0.0'
-    api 'com.google.android.gms:play-services-auth:15.0.0'
-    api 'com.google.android.gms:play-services-drive:15.0.0'
-    api 'com.google.android.gms:play-services-location:15.0.0'
-    api 'com.google.android.gms:play-services-maps:15.0.0'
+    implementation 'com.google.android.gms:play-services-auth:15.0.0'
+    implementation 'com.google.android.gms:play-services-drive:15.0.0'
+    implementation 'com.google.android.gms:play-services-location:15.0.0'
+    implementation 'com.google.android.gms:play-services-maps:15.0.0'
 
-    // Dependencies for the REST API example
-    api ('com.google.api-client:google-api-client:1.22.0') {
+    // Dependencies for the REST implementation example
+    implementation ('com.google.api-client:google-api-client:1.22.0') {
         exclude group: 'org.apache.httpcomponents'
     }
-    api ('com.google.api-client:google-api-client-android:1.22.0') {
+    implementation ('com.google.api-client:google-api-client-android:1.22.0') {
         exclude group: 'org.apache.httpcomponents'
     }
 
     // Google Drive java library
-    api 'com.google.apis:google-api-services-drive:v3-rev81-1.22.0'
+    implementation 'com.google.apis:google-api-services-drive:v3-rev81-1.22.0'
 
     // Twitter
     // https://mvnrepository.com/artifact/org.twitter4j/twitter4j-core
-    //api (group: 'org.twitter4j', name: 'twitter4j-core', version: '4.0.1') {
-        // exclude group: 'org.apache.httpcomponents'
-    //}
+    implementation (group: 'org.twitter4j', name: 'twitter4j-core', version: '4.+') {
+        exclude group: 'org.apache.httpcomponents'
+    }
 
-    api project(path: ':CommonAppLib')
+    implementation project(path: ':CommonAppLib')
 }
 
 repositories {
