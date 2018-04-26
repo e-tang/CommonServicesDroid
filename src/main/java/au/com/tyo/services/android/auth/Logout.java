@@ -17,17 +17,17 @@
 package au.com.tyo.services.android.auth;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 
 import au.com.tyo.services.android.R;
 import au.com.tyo.services.sn.SNBase;
 
 public class Logout {
 	
-	public static void popupWanningDialog(Context context, final SNBase sn) {
+	public static void popupWarningDialog(Context context, final SNBase sn) {
 		Dialog dialog = null;
 		int iconId = Resources.getIconResourceId(sn.getType());
 		if (iconId == -1)
