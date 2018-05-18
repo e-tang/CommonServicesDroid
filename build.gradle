@@ -11,8 +11,10 @@ android {
 }
 
 dependencies {
+    implementation project (':CommonUtils')
     implementation project (':CommonServices')
     implementation project (':CommonAndroid')
+    implementation project (':CommonAppLib')
 
     // https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
     //implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.3'
@@ -57,7 +59,7 @@ dependencies {
         exclude group: 'org.apache.httpcomponents'
     }
 
-    implementation project(path: ':CommonAppLib')
+    implementation 'com.android.support:appcompat-v7:27.1.1'
 }
 
 repositories {
