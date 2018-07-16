@@ -21,7 +21,7 @@ import android.content.res.Resources.NotFoundException;
 import android.graphics.Bitmap;
 import android.util.Base64;
 
-import au.com.tyo.android.utils.BitmapUtils;
+import au.com.tyo.android.images.utils.BitmapUtils;
 import au.com.tyo.services.android.R;
 import au.com.tyo.services.android.auth.SecretSafe;
 import au.com.tyo.services.sn.twitter.SNTwitter;
