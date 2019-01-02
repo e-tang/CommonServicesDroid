@@ -32,7 +32,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import au.com.tyo.android.AndroidUtils;
-import au.com.tyo.app.CommonActivityWebView;
+import au.com.tyo.app.ui.activity.CommonActivityWebView;
 import au.com.tyo.app.Controller;
 import au.com.tyo.app.ui.page.PageWebView;
 
