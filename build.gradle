@@ -11,7 +11,7 @@ project.ext {
 
 android {
     compileSdkVersion COMPILE_SDK_VERSION
-    buildToolsVersion TOOLS_VERSION
+    // buildToolsVersion TOOLS_VERSION
 
     defaultConfig {
         minSdkVersion MINIMUM_SDK_VERSION
