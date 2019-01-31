@@ -124,11 +124,11 @@ public class GoogleFusedLocation extends CommonLocationService implements Google
     }
 
     @Override
-    protected boolean handleServiceMessage(Message m) {
+    protected boolean handleClientMessage(Message m) {
         if (m.what == Constants.MESSAGE_SERVICE_PERMISSION_GRANTED) {
             onPermissionMessageReceived();
         }
-        return super.handleServiceMessage(m);
+        return super.handleClientMessage(m);
     }
 
     protected void onPermissionMessageReceived() {
