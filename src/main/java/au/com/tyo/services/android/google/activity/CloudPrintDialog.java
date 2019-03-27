@@ -18,7 +18,7 @@ import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
 import android.print.PrintDocumentInfo;
 import android.print.PrintManager;
-import android.support.v4.print.PrintHelper;
+import androidx.print.PrintHelper;
 import android.util.Base64;
 import android.util.Log;
 import android.webkit.JavascriptInterface;

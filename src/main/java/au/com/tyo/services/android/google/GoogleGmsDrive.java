@@ -3,7 +3,7 @@ package au.com.tyo.services.android.google;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.Log;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
