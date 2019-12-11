@@ -71,8 +71,8 @@ public class GoogleFusedLocation extends CommonLocationService implements Google
         }
     }
 
-    private static final long UPDATE_INTERVAL_IN_MILLISECONDS = BuildConfig.DEBUG ? 0 : 1 * 60 * 1000;
-    private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = BuildConfig.DEBUG ? 0: 1000;
+    private static final long UPDATE_INTERVAL_IN_MILLISECONDS = 50;
+    private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = 10;
 
     public GoogleFusedLocation() {
         super();
@@ -119,8 +119,11 @@ public class GoogleFusedLocation extends CommonLocationService implements Google
     public void onConnected(@Nullable Bundle bundle) {
         Log.i(TAG, "Connected to Google location service.");
 
-        if (hasLocationPermission())
+        if (hasLocationPermission()) {
+            queryLastKnowLocation(getApplicationContext());
+
             startLocationUpdate();
+        }
     }
 
     @Override
