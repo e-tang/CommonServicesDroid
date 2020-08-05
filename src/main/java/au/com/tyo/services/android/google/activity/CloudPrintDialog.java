@@ -18,7 +18,7 @@ import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
 import android.print.PrintDocumentInfo;
 import android.print.PrintManager;
-import androidx.print.PrintHelper;
+
 import android.util.Base64;
 import android.util.Log;
 import android.webkit.JavascriptInterface;
@@ -32,6 +32,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import au.com.tyo.android.AndroidUtils;
+
+import au.com.tyo.android.utils.PrintHelper;
 import au.com.tyo.app.ui.activity.CommonActivityWebView;
 import au.com.tyo.app.Controller;
 import au.com.tyo.app.ui.page.PageWebView;
@@ -212,16 +214,16 @@ public class CloudPrintDialog extends CommonActivityWebView {
     public static void printDocument(final Context context, final Uri docUri, final String docMimeType, final String title, int width, int height) {
 
         final boolean isPhoto = docMimeType.startsWith("image");
-        if (isPhoto) {
-            PrintHelper photoPrinter = new PrintHelper(context);
-            photoPrinter.setScaleMode(PrintHelper.SCALE_MODE_FIT);
-            try {
-                photoPrinter.printBitmap(title, docUri);
-            } catch (FileNotFoundException e) {
-                Log.e(TAG, "Cannot find photo: " +  docUri.toString());
-            }
-            return;
-        }
+//        if (isPhoto) {
+//            PrintHelper photoPrinter = new PrintHelper();
+//            photoPrinter.setScaleMode(PrintHelper.SCALE_MODE_FIT);
+//            try {
+//                photoPrinter.printBitmap(title, docUri);
+//            } catch (FileNotFoundException e) {
+//                Log.e(TAG, "Cannot find photo: " +  docUri.toString());
+//            }
+//            return;
+//        }
 
         PrintAttributes attributes = null;
         if (width > -1 && height > -1) {
